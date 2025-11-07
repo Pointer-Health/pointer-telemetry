@@ -3,6 +3,8 @@ from contextlib import contextmanager
 from datetime import datetime, timezone
 
 NUMBER_RE = re.compile(r"\b\d{3,}\b")  # crude de-noising for message_template
+EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+HEX_RE   = re.compile(r"\b[0-9a-fA-F]{16,}\b")
 
 def new_request_id() -> str:
     return uuid.uuid4().hex[:16]
@@ -10,8 +12,10 @@ def new_request_id() -> str:
 def message_template(s: str | None) -> str | None:
     if not s:
         return None
-    # Replace long numeric blobs to improve dedupe; customize as needed
-    return NUMBER_RE.sub("<num>", s)
+    s = NUMBER_RE.sub("<num>", s)
+    s = EMAIL_RE.sub("<email>", s)
+    s = HEX_RE.sub("<hex>", s)
+    return s
 
 def error_fingerprint(exc_type: str, msg_template: str | None, top_frames: list[str], service: str, release: str | None) -> str:
     key = "|".join([
