@@ -1,5 +1,4 @@
 # pointer_telemetry
-# pointer_telemetry
 
 Structured application telemetry for Python and Flask services.
 
@@ -32,13 +31,13 @@ It is **lightweight**, **database-driven**, and **intentionally framework-neutra
 ### Install directly from GitHub
 
 ```bash
-pip install git+https://github.com/Pointer-Health/pointer_telemetry.git
+pip install git+https://github.com/Pointer-Health/pointer-telemetry.git
 ```
 
 ### Or add to requirements.txt
 
 ```bash
-git+https://github.com/Pointer-Health/pointer_telemetry.git@main
+git+https://github.com/Pointer-Health/pointer-telemetry.git@main
 ```
 
 ## Database Requirements
