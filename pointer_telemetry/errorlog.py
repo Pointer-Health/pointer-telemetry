@@ -6,7 +6,7 @@ def make_error_logger(db_session, ErrorLogModel, *, service: str, environment: s
     Returns a function `log_error(**kwargs)` that writes to ErrorLog safely.
     Usage:
         log_error = make_error_logger(db.session, ErrorLog, service="processing", environment="prod", release_version=GIT_TAG)
-        log_error(message=str(e), stack_trace=tb, route="/process_patient", function_name="process_patient_task", clinic_id=..., vet_id=..., dog_id=...)
+        log_error(message=str(e), stack_trace=tb, route="/process_patient", function_name="process_patient_task", clinic_id=..., clinic_id=..., dog_id=...)
     """
     def _log_error(
         *,
@@ -18,7 +18,7 @@ def make_error_logger(db_session, ErrorLogModel, *, service: str, environment: s
         http_method: str | None = None,
         http_status: int | None = None,
         latency_ms: int | None = None,
-        vet_id=None, dog_id=None,
+        clinic_id=None, dog_id=None,
         message_params: dict | None = None,
         tags: dict | None = None,
         request_id: str | None = None,
@@ -60,7 +60,7 @@ def make_error_logger(db_session, ErrorLogModel, *, service: str, environment: s
             latency_ms=latency_ms,
             request_id=request_id,
             session_id=session_id,
-            vet_id=vet_id,
+            clinic_id=clinic_id,
             dog_id=dog_id,
             fingerprint=fp,
             tags=tags or {},

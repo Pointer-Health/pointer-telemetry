@@ -35,7 +35,7 @@ class DBLogHandler(logging.Handler):
             service_component= getattr(record, "service_component", None)
             message_params   = getattr(record, "message_params", None)
             request_id = getattr(record, "request_id", None)
-            vet_id     = getattr(record, "vet_id", None)
+            clinic_id     = getattr(record, "clinic_id", None)
             dog_id     = getattr(record, "dog_id", None)
             latency_ms = getattr(record, "latency_ms", None)
             tags       = getattr(record, "tags", None)
@@ -87,7 +87,7 @@ class DBLogHandler(logging.Handler):
                     http_method=http_method,
                     http_status=http_status,
                     latency_ms=latency_ms,
-                    vet_id=vet_id,
+                    clinic_id=clinic_id,
                     dog_id=dog_id,
                     request_id=request_id,
                     session_id=session_id,

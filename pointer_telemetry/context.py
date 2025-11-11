@@ -37,7 +37,7 @@ def stack_top_frames(tb_text: str | None) -> list[str]:
 
 @contextmanager
 def track_latency(db, *, service: str, peer: str, route: str, method: str,
-                  clinic_id=None, vet_id=None, dog_id=None,
+                  clinic_id=None, dog_id=None,
                   request_id: str | None=None,
                   slow_ms: int = 2000,
                   sample_rate_fast: float = 0.02,
@@ -67,7 +67,7 @@ def track_latency(db, *, service: str, peer: str, route: str, method: str,
                     created_at=datetime.now(timezone.utc),
                     service=service, peer=peer, route=route, method=method,
                     status=status, ok=ok, latency_ms=ms, request_id=req_id,
-                    clinic_id=clinic_id, vet_id=vet_id, dog_id=dog_id
+                    clinic_id=clinic_id, dog_id=dog_id
                 ))
         # 2) slow warning to ErrorLog
         if (ms >= slow_ms) and log_warning:
@@ -76,5 +76,5 @@ def track_latency(db, *, service: str, peer: str, route: str, method: str,
                 level="WARNING",
                 route=route, function_name=f"http:{peer}",
                 http_method=method, http_status=status, latency_ms=ms,
-                clinic_id=clinic_id, vet_id=vet_id, dog_id=dog_id
+                clinic_id=clinic_id, dog_id=dog_id
             )
